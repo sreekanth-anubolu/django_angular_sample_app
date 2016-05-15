@@ -1,0 +1,39 @@
+<div class="mail-form box-primary" ng-controller="sendMailCtrl as ctrl">
+  <!--div id="success-msg" class="alert alert-success" ng-hide="hide">
+    <strong>Mail sent successfully.</strong>
+  </div-->
+  <div class="box-header">
+    <h3 class="box-title pull-left">Send Mail</h3>
+    <span class="pull-right"><i class="fa fa-times" ng-click="smCtrl.cancel()"></i></span>
+  </div><!-- /.box-header -->
+  <!-- form start -->
+  <form class="fit-to-screen" role="form" name="mailForm" novalidate ng-style="style()"
+    resize-height perfect-scrollbar suppress-scroll-x="true" scrollbar-y-rail-width="6">
+    <div class="box-body">
+
+      <div style="clear: both;"></div>
+
+      <div class="form-group" ng-init="ctrl.mail.to = smCtrl.scope.data.email">
+        <label for="email">To email</label>
+        <input type="text" class="form-control" name="email" ng-model="ctrl.mail.to" required>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="email" class="form-control" name="subject" ng-model="ctrl.mail.subject" required>
+      </div>
+
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea class="form-control" name="content" ng-model="ctrl.mail.content" required></textarea>
+      </div>
+
+    </div><!-- /.box-body -->
+
+    <div class="box-footer">
+      <button type="submit" class="btn btn-primary" ng-click="ctrl.sendMail(smCtrl, smCtrl.scope.data.id)" >Send Mail</button>
+      <uib-alert class="alert-msg"  ng-show="ctrl.showAlert" type="{{ ctrl.alert.type }}">{{ ctrl.alert.msg }}</uib-alert>
+    </div>
+  </form>
+
+</div>

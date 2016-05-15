@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-sm-3 col-md-2 sidebar">
+      <h3 class="list-header">Problem</h3>
+      <ul class="sb-list">
+        <li ng-repeat="prob in ctrl.problemOptions">
+          <input type="checkbox" name="sector" ng-model="ctrl.filters.problem[prob]" /> {{ prob }}
+        </li>
+      </ul>
+
+      <h3 class="list-header"> Date </h3>
+      <ul class="sb-list">
+        <li ng-repeat="day in ctrl.dateOptions">
+            <input type="checkbox" name="sector" ng-model="ctrl.filters.date[day]" /> {{ day }}
+        </li>
+        <!--li>
+          <input type="checkbox" name="sector" /> Old
+        </li-->
+      </ul>
+
+      <h3 class="list-header"> Status </h3>
+      <ul class="sb-list">
+        <li ng-repeat="st in ctrl.stateOptions">
+          <input type="checkbox" name="sector" ng-model="ctrl.filters.state[st]" /> {{ st }}
+        </li>
+      </ul>
+
+  </div>
+  <div class="col-sm-9 col-sm-offset-3 col-md-7 col-md-offset-2 main">
+    <div class="items">
+      <div class="box" >
+        <table id="suggestions" class="table table-bordered">
+            <thead>
+                <tr role="row">
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        User
+                    </th>
+                    <th>
+                        APK version
+                    </th>
+                    <th>
+                        Subscription Type
+                    </th>
+                    <th>
+                        Recipe
+                    </th>
+                    <th>
+                        Problem
+                    </th>
+                    <th>
+                        Same as
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                    <th>
+                        GCM Push
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="odd"  ng-repeat="item in suggestions" ng-switch on="item.email_status">
+                    <td>{{ item.created_on | date:'dd/MM/yyyy'}}</td>
+                    <td data-id="{{ item.created_by}}">{{ item.email }}</td>
+                    <td>{{ item.apk_version }}</td>
+                    <td>{{ item.subscription_type }}</td>
+                    <td>{{ item.suggested_food }}</td>
+                    <td>{{ item.problem }}</td>
+                    <td>{{ item.same_as }}</td>
+                    <td>{{ item.action_taken }}</td>
+                    <td>{{ item.gcm_push==true ? 'Yes' : 'No' }}</td>
+                    <td ng-switch-when="true"><strong><i>Mail Sent</i></strong></td>
+                    <td data-id="{{item.id}}" data-email="{{ item.email }}" ng-switch-when="false">
+                        <my-modal size="lg" backdrop='static' data="item" template="static/partials/mail_modal.html">
+                            <button class="btn btn-primary"> Send Mail</button>
+                        </my-modal>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
